@@ -5,8 +5,9 @@ import Products from "./components/Products";
 import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { allProducts } from "./data/products";
 import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
-import { ArrowUp, ShoppingBag, X, MessageCircle, ExternalLink } from "lucide-react";
+import { ArrowUp, ShoppingBag, X, MessageCircle, ExternalLink, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export interface CartItem {
@@ -273,16 +274,30 @@ export default function App() {
                     <button onClick={() => setIsWishlistOpen(false)} className="bg-brand-primary text-white px-8 py-3 rounded-xl font-bold text-sm btn-gradient">Favorite some Drinks</button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 gap-4">
-                    <p className="text-xs text-gray-400 mb-2 uppercase font-bold tracking-widest">{likedIds.length} Items Liked</p>
-                    {/* Note: In a real app we'd fetch product details here. For now, we show their IDs or just a placeholder if we don't have a global product list easily accessible */}
-                    <p className="text-sm text-gray-500 italic">Favorite items are saved in your browser.</p>
-                    <button 
-                       onClick={() => { setIsWishlistOpen(false); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }); }}
-                       className="text-brand-primary font-bold text-sm text-left hover:underline"
-                    >
-                      View all products to manage likes →
-                    </button>
+                  <div className="space-y-6">
+                    {allProducts.filter(p => likedIds.includes(p.id)).map(product => (
+                      <div key={product.id} className="flex gap-4 group">
+                        <div className="w-20 h-20 bg-gray-100 rounded-2xl overflow-hidden shrink-0">
+                           <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <h4 className="font-bold text-gray-900">{product.name}</h4>
+                            <button onClick={() => toggleLike(product.id)} className="text-red-500">
+                              <Heart size={16} fill="currentColor" />
+                            </button>
+                          </div>
+                          <p className="text-[10px] text-gray-400 uppercase font-black tracking-widest">{product.brand}</p>
+                          <p className="text-sm font-black text-gray-900 mt-2">Ksh {product.price}</p>
+                          <button 
+                            onClick={() => { addToCart({ id: product.id, name: product.name, price: product.price }); setIsWishlistOpen(false); setIsCartOpen(true); }}
+                            className="text-brand-primary text-[10px] font-black uppercase tracking-widest mt-2 hover:underline"
+                          >
+                            Add to Bag
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>

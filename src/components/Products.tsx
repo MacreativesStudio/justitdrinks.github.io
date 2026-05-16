@@ -4,125 +4,7 @@ import { Heart, Plus, ShoppingBag, X, MessageCircle, ChevronRight, Share2, Star 
 
 const WHATSAPP_NUMBER = "+254735008421";
 
-const productData: { [key: string]: Product[] } = {
-  jaba: [
-    {
-      id: 1,
-      name: "Original Jaba Juice",
-      brand: "Just It",
-      category: "Jaba Collection",
-      description: "Authentic, energizing experience that keeps you sharp for hours.",
-      fullDescription: "The pure essence of khat. Crafted with premium leaves for an authentic, energizing experience that keeps you sharp for hours. A traditional favorite reinvented for the modern palate.",
-      image: "https://images.unsplash.com/photo-1610970881699-44a5587cabec?q=80&w=1000&auto=format&fit=crop",
-      price: 250,
-      tags: ["Energizing", "Pure"],
-    },
-    {
-      id: 2,
-      name: "Lemon Zing Jaba",
-      brand: "Just It",
-      category: "Jaba Collection",
-      description: "Infused with Mediterranean lemon zest for a refreshing kick.",
-      fullDescription: "Our signature jaba juice infused with Mediterranean lemon zest. The perfect balance of bitter and sour for a refreshing kick that awakens the senses.",
-      image: "https://images.unsplash.com/photo-1523473827533-2a64d0d36748?q=80&w=1000&auto=format&fit=crop",
-      price: 280,
-      tags: ["Zesty", "Refreshing"],
-    },
-    {
-      id: 3,
-      name: "Berry Kush Jaba",
-      brand: "Just It",
-      category: "Jaba Collection",
-      description: "A wild blend of forest berries with natural energy.",
-      fullDescription: "A wild blend of forest berries mixed with the natural energy of jaba. Sweet, tart, and incredibly invigorating for any time of day.",
-      image: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=1000&auto=format&fit=crop",
-      price: 300,
-      tags: ["Fruit", "Vitality"],
-    },
-    {
-      id: 4,
-      name: "Ginger Blast Jaba",
-      brand: "Just It",
-      category: "Jaba Collection",
-      description: "Ultimate health-meets-energy tonic with double strength ginger.",
-      fullDescription: "The ultimate health-meets-energy tonic. Double-strength ginger juice extracts combined with our premium jaba base for a spicy, healthy lift.",
-      image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1000&auto=format&fit=crop",
-      price: 280,
-      tags: ["Immunity", "Spicy"],
-    },
-  ],
-  moratina: [
-    {
-      id: 7,
-      name: "Classic Moratina",
-      brand: "Just It",
-      category: "Moratina Collection",
-      description: "Refined non-alcoholic version of the tradition.",
-      fullDescription: "A refined, non-alcoholic version of the traditional Kenyan classic. Deep, rich, and sophisticated with notes of roasted honey and heritage.",
-      image: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=600&auto=format&fit=crop",
-      price: 350,
-      tags: ["Heritage", "Rich"],
-    },
-    {
-      id: 10,
-      name: "Honey Gold Moratina",
-      brand: "Just It",
-      category: "Moratina Collection",
-      description: "Liquid gold sweetness with a heritage base.",
-      fullDescription: "Premium Moratina base infused with sustainably sourced honey. A smoother, sweeter take on the classic experience.",
-      image: "https://images.unsplash.com/photo-1582298538104-fe2e74274c10?q=80&w=1000&auto=format&fit=crop",
-      price: 380,
-      tags: ["Sweet", "Natural"],
-    },
-  ],
-  natural: [
-    {
-      id: 8,
-      name: "Hibiscus High",
-      brand: "Freshly",
-      category: "Natural Juice",
-      description: "Cold-brewed hibiscus with a hint of lime and mint.",
-      fullDescription: "Cold-brewed hibiscus with a hint of lime and mint. A floral explosion that stays with you, packed with antioxidants and natural freshness.",
-      image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?q=80&w=600&auto=format&fit=crop",
-      price: 220,
-      tags: ["Antioxidant", "Floral"],
-    },
-    {
-      id: 9,
-      name: "Baobab Bliss",
-      brand: "Wild",
-      category: "Natural Juice",
-      description: "Superfood in a bottle. Tangy baobab and honey.",
-      fullDescription: "Superfood in a bottle. Tangy baobab fruit blended with wild honey and vanilla for a creamy, nutritious delight that fuels your body.",
-      image: "https://images.unsplash.com/photo-1600271886391-fc54930145c3?q=80&w=600&auto=format&fit=crop",
-      price: 280,
-      tags: ["Superfood", "Tangy"],
-    },
-    {
-      id: 11,
-      name: "Passion Punch",
-      brand: "Coastal",
-      category: "Natural Juice",
-      description: "Intense passion fruit with a tropical twist.",
-      fullDescription: "A vibrant blend of coastal passion fruits. Sharp, sweet, and perfectly chilled for Kenya's sunny afternoons.",
-      image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop",
-      price: 240,
-      tags: ["Tropical", "Vibrant"],
-    }
-  ]
-};
-
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  category: string;
-  description: string;
-  fullDescription: string;
-  image: string;
-  price: number;
-  tags: string[];
-}
+import { productData, Product } from "../data/products";
 
 const ProductCard: React.FC<{
   product: Product;
@@ -390,6 +272,12 @@ export default function Products({ onAddToCart, likedIds, onToggleLike }: Produc
                   <div className="font-display font-black text-brand-primary text-4xl">
                     Ksh {selectedProduct.price}
                   </div>
+                  <button 
+                    onClick={() => onToggleLike(selectedProduct.id)}
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${likedIds.includes(selectedProduct.id) ? 'bg-red-500 text-white' : 'bg-gray-50 text-gray-400 hover:text-red-500'}`}
+                  >
+                    <Heart size={24} fill={likedIds.includes(selectedProduct.id) ? "currentColor" : "none"} />
+                  </button>
                   <div className="w-px h-10 bg-gray-100" />
                   <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                     In Stock <br />
