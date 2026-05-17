@@ -49,31 +49,31 @@ export default function Hero() {
             <span className="text-brand-primary text-[10px] font-black uppercase tracking-[0.2em]">Kenya's Premium Refreshment</span>
           </motion.div>
           
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-[0.95] mb-8 tracking-tight">
+          <h1 className="font-display text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight">
             Refresh <br />
             <span className="text-brand-primary italic">Naturally.</span>
           </h1>
           
-          <p className="text-gray-500 text-lg md:text-xl max-w-lg mb-10 md:mb-12 leading-relaxed">
+          <p className="text-gray-500 text-base md:text-lg max-w-md mb-10 leading-relaxed">
             Just It is a modern non-alcoholic beverage brand inspired by natural African flavors and healthy Kenyan vibes. Real ingredients, real goodness.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-5">
+          <div className="flex flex-col sm:flex-row gap-4">
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=Hi Just It! I'd like to see your menu.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-primary text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold flex items-center justify-center gap-3 btn-gradient group"
+              className="bg-brand-primary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-all active:scale-95"
             >
-              <MessageCircle size={22} className="group-hover:rotate-12 transition-transform" />
+              <MessageCircle size={20} />
               Order on WhatsApp
             </a>
             <button
               onClick={handleExplore}
-              className="border-2 border-gray-100 bg-white text-gray-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold flex items-center justify-center gap-3 hover:border-brand-primary/30 transition-all transition-transform active:scale-95 group"
+              className="border border-gray-100 bg-white text-gray-900 px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:border-brand-primary/30 transition-all active:scale-95"
             >
               Explore Drinks
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} />
             </button>
           </div>
           

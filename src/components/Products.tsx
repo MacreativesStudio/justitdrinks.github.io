@@ -16,46 +16,41 @@ const ProductCard: React.FC<{
   return (
     <motion.div 
       layout
-      className="flex-shrink-0 w-[240px] md:w-[280px] group bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 border border-gray-100"
+      className="flex-shrink-0 w-[170px] md:w-[200px] group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100/50"
     >
-      <div className="relative h-[240px] md:h-[280px] overflow-hidden bg-gray-50">
+      <div className="relative h-[170px] md:h-[200px] overflow-hidden bg-gray-50">
         <img 
           src={product.image} 
           alt={product.name} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
           onClick={() => onQuickView(product)}
         />
         <button 
           onClick={(e) => { e.stopPropagation(); onToggleLike(product.id); }}
-          className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all ${isLiked ? 'bg-red-500 text-white shadow-lg' : 'bg-white/80 backdrop-blur-sm text-gray-400 hover:text-red-500'}`}
+          className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all ${isLiked ? 'bg-red-500 text-white shadow-sm' : 'bg-white/90 backdrop-blur-sm text-gray-300 hover:text-red-500'}`}
         >
-          <Heart size={18} fill={isLiked ? "currentColor" : "none"} />
+          <Heart size={14} fill={isLiked ? "currentColor" : "none"} />
         </button>
-        <div className="absolute bottom-4 left-4 flex gap-1">
-          {product.tags.slice(0, 1).map(tag => (
-            <span key={tag} className="px-2 py-1 bg-brand-primary/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-lg backdrop-blur-sm">
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
       
-      <div className="p-5">
-        <div className="mb-3">
-          <div className="flex justify-between items-start mb-1">
-            <h3 className="font-display font-bold text-lg text-gray-900 leading-tight line-clamp-1">{product.name}</h3>
-            <span className="text-[10px] font-black text-brand-primary/40 uppercase tracking-tighter">{product.brand}</span>
-          </div>
-          <p className="text-gray-400 text-xs line-clamp-1 uppercase tracking-wider font-semibold">{product.category}</p>
+      <div className="p-3">
+        <div className="mb-2">
+          <h3 
+            className="font-bold text-sm text-gray-900 leading-tight line-clamp-1 cursor-pointer hover:text-brand-primary"
+            onClick={() => onQuickView(product)}
+          >
+            {product.name}
+          </h3>
+          <p className="text-[10px] font-black text-brand-primary/60 uppercase tracking-tighter mt-0.5">{product.brand}</p>
         </div>
         
-        <div className="flex items-center justify-between mt-auto">
-          <span className="font-display font-black text-brand-primary text-xl">Ksh {product.price}</span>
+        <div className="flex items-center justify-between">
+          <span className="font-bold text-gray-900 text-sm">Ksh {product.price}</span>
           <button 
             onClick={() => onAddToCart(product)}
-            className="w-10 h-10 rounded-2xl bg-brand-secondary text-brand-primary flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all transform active:scale-95"
+            className="w-8 h-8 rounded-xl bg-brand-secondary text-brand-primary flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all transform active:scale-90"
           >
-            <Plus size={20} />
+            <Plus size={16} />
           </button>
         </div>
       </div>
@@ -64,12 +59,12 @@ const ProductCard: React.FC<{
 };
 
 const SectionHeader: React.FC<{ title: string; subtitle: string }> = ({ title, subtitle }) => (
-  <div className="flex flex-col mb-8">
-    <div className="flex items-center gap-3 mb-2">
-      <div className="w-10 h-[2px] bg-brand-primary" />
-      <span className="text-brand-primary font-black uppercase text-[10px] tracking-[0.3em]">{subtitle}</span>
+  <div className="flex flex-col mb-4">
+    <div className="flex items-center gap-2 mb-1">
+      <div className="w-6 h-[2px] bg-brand-primary" />
+      <span className="text-brand-primary font-black uppercase text-[9px] tracking-[0.2em]">{subtitle}</span>
     </div>
-    <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 -tracking-tight">{title}</h2>
+    <h2 className="font-display text-2xl md:text-3xl font-bold text-gray-900 -tracking-tight">{title}</h2>
   </div>
 );
 
@@ -85,31 +80,31 @@ const HorizontalCollection: React.FC<{
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="mb-20 last:mb-0">
-      <div className="flex justify-between items-end mb-8 px-6 max-w-7xl mx-auto">
+    <div className="mb-16 last:mb-0">
+      <div className="flex justify-between items-end mb-6 px-6 max-w-7xl mx-auto">
         <SectionHeader title={title} subtitle={subtitle} />
-        <div className="hidden md:flex gap-2">
+        <div className="hidden md:flex gap-1.5">
            <button 
             onClick={() => scrollRef.current?.scrollBy({ left: -300, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-xl border border-gray-100 flex items-center justify-center text-gray-400 hover:border-brand-primary hover:text-brand-primary transition-all"
+            className="w-8 h-8 rounded-lg border border-gray-100 flex items-center justify-center text-gray-300 hover:border-brand-primary hover:text-brand-primary transition-all"
            >
-             <ChevronRight className="rotate-180" size={20} />
+             <ChevronRight className="rotate-180" size={16} />
            </button>
            <button 
             onClick={() => scrollRef.current?.scrollBy({ left: 300, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-xl border border-gray-100 flex items-center justify-center text-gray-400 hover:border-brand-primary hover:text-brand-primary transition-all"
+            className="w-8 h-8 rounded-lg border border-gray-100 flex items-center justify-center text-gray-300 hover:border-brand-primary hover:text-brand-primary transition-all"
            >
-             <ChevronRight size={20} />
+             <ChevronRight size={16} />
            </button>
         </div>
       </div>
       
       <div 
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto px-6 pb-8 hide-scrollbar snap-x scroll-px-6 md:px-[calc((100vw-min(1280px,calc(100vw-3rem)))/2)]"
+        className="flex gap-4 overflow-x-auto px-6 pb-6 hide-scrollbar snap-x scroll-px-6"
       >
         {products.map((product) => (
-          <div key={product.id} className="snap-start first:pl-0">
+          <div key={product.id} className="snap-start">
             <ProductCard 
               product={product} 
               onAddToCart={onAddToCart} 
@@ -147,7 +142,7 @@ export default function Products({ onAddToCart, likedIds, onToggleLike }: Produc
   };
 
   return (
-    <section id="products" className="py-24 bg-white overflow-hidden">
+    <section id="products" className="py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -226,19 +221,19 @@ export default function Products({ onAddToCart, likedIds, onToggleLike }: Produc
             
             <motion.div 
               layoutId={`product-${selectedProduct.id}`}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-[900px] rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative bg-white w-full max-w-[700px] rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row"
             >
               <button 
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-6 right-6 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 z-10 transition-all shadow-sm"
+                className="absolute top-4 right-4 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 z-10 transition-all shadow-sm"
               >
-                <X size={20} />
+                <X size={16} />
               </button>
 
-              <div className="w-full md:w-1/2 h-[300px] md:h-auto bg-gray-50 flex items-center justify-center">
+              <div className="w-full md:w-1/2 h-[240px] md:h-auto bg-gray-50">
                 <img 
                   src={selectedProduct.image} 
                   alt={selectedProduct.name} 
@@ -246,58 +241,46 @@ export default function Products({ onAddToCart, likedIds, onToggleLike }: Produc
                 />
               </div>
               
-              <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                <div className="mb-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="px-3 py-1 bg-brand-secondary text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-full">
+              <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-brand-secondary text-brand-primary text-[9px] font-black uppercase tracking-widest rounded-full">
                       {selectedProduct.category}
                     </span>
-                    <div className="flex text-brand-gold">
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                    </div>
                   </div>
-                  <h3 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                  <h3 className="font-display text-2xl font-bold text-gray-900 mb-2 leading-tight">
                     {selectedProduct.name}
                   </h3>
-                  <p className="text-gray-500 text-lg leading-relaxed">
+                  <p className="text-gray-500 text-sm leading-relaxed line-clamp-4">
                     {selectedProduct.fullDescription}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-6 mb-10">
-                  <div className="font-display font-black text-brand-primary text-4xl">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="font-display font-black text-brand-primary text-3xl">
                     Ksh {selectedProduct.price}
                   </div>
                   <button 
                     onClick={() => onToggleLike(selectedProduct.id)}
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${likedIds.includes(selectedProduct.id) ? 'bg-red-500 text-white' : 'bg-gray-50 text-gray-400 hover:text-red-500'}`}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${likedIds.includes(selectedProduct.id) ? 'bg-red-500 text-white' : 'bg-gray-50 text-gray-300 hover:text-red-500'}`}
                   >
-                    <Heart size={24} fill={likedIds.includes(selectedProduct.id) ? "currentColor" : "none"} />
+                    <Heart size={18} fill={likedIds.includes(selectedProduct.id) ? "currentColor" : "none"} />
                   </button>
-                  <div className="w-px h-10 bg-gray-100" />
-                  <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                    In Stock <br />
-                    <span className="text-green-500 text-[10px]">Fresh Batch</span>
-                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3">
                   <button 
                     onClick={() => { onAddToCart(selectedProduct); setSelectedProduct(null); }}
-                    className="flex items-center justify-center gap-3 bg-brand-primary text-white py-4 rounded-2xl font-bold hover:btn-gradient transition-all shadow-lg shadow-brand-primary/20 active:scale-95"
+                    className="flex items-center justify-center gap-2 bg-brand-primary text-white py-3.5 rounded-xl font-bold hover:btn-gradient transition-all active:scale-95 text-sm"
                   >
-                    <ShoppingBag size={20} />
+                    <ShoppingBag size={18} />
                     Add to Basket
                   </button>
                   <button 
                     onClick={() => handleWhatsAppOrder(selectedProduct)}
-                    className="flex items-center justify-center gap-3 bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-black transition-all active:scale-95"
+                    className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3.5 rounded-xl font-bold hover:bg-black transition-all active:scale-95 text-sm"
                   >
-                    <MessageCircle size={20} />
+                    <MessageCircle size={18} />
                     Order on WhatsApp
                   </button>
                 </div>

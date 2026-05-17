@@ -3,7 +3,7 @@ import { ExternalLink, Instagram, Facebook, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 py-16 md:py-24">
+    <footer className="bg-white border-t border-gray-100 py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-20 mb-16">
           <div className="col-span-1 md:col-span-2">

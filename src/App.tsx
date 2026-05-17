@@ -71,7 +71,7 @@ export default function App() {
   const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   const handleCheckout = () => {
-    const message = `*🍹 NEW ORDER — JUST IT*%0A%0A` + 
+    const message = `🍹 *NEW ORDER — JUST IT*%0A%0A` + 
       `Customer: Guest User%0A` +
       `━━━━━━━━━━━━━━━%0A%0A` + 
       cart.map(item => `🧃 *${item.name}*%0AQty: ${item.quantity}%0APrice: Ksh ${item.price * item.quantity}`).join('%0A%0A') + 
@@ -113,7 +113,7 @@ export default function App() {
         <Features />
         
         {/* The Vibe Section */}
-        <section className="py-24 bg-white overflow-hidden relative">
+        <section className="py-16 bg-white overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
               <div>
