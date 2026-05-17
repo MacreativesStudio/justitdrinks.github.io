@@ -3,7 +3,6 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Products from "./components/Products";
 import Features from "./components/Features";
-import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { allProducts } from "./data/products";
@@ -41,7 +40,14 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     
     const savedWishlist = localStorage.getItem('wishlist');
-    if (savedWishlist) setLikedIds(JSON.parse(savedWishlist));
+    if (savedWishlist) {
+      try {
+        setLikedIds(JSON.parse(savedWishlist));
+      } catch (e) {
+        console.error("Failed to parse wishlist", e);
+        localStorage.removeItem('wishlist');
+      }
+    }
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -112,7 +118,6 @@ export default function App() {
           onToggleLike={toggleLike}
         />
         <Features />
-        <Testimonials />
         
         {/* The Vibe Section */}
         <section className="py-16 bg-white overflow-hidden relative">
@@ -135,20 +140,20 @@ export default function App() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px] md:h-[500px]">
               <div className="col-span-1 rounded-[32px] overflow-hidden bg-gray-50 border border-gray-100">
-                <img src="https://images.unsplash.com/photo-1523363342553-61fc072a2455?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-110" alt="vibe moment 1" />
+                <img src="https://images.unsplash.com/photo-1523363342553-61fc072a2455?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" alt="Vibe" />
               </div>
               <div className="col-span-1 md:col-span-2 row-span-2 rounded-[40px] overflow-hidden relative group bg-gray-50 border border-gray-100">
-                <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="vibe main" />
+                <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Vibe" />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-8 left-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-500">
                   <p className="text-white font-display font-bold text-2xl italic">Pure African Goodness.</p>
                 </div>
               </div>
               <div className="col-span-1 rounded-[32px] overflow-hidden bg-gray-50 border border-gray-100">
-                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-110" alt="vibe moment 2" />
+                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" alt="Vibe" />
               </div>
               <div className="col-span-1 rounded-[32px] overflow-hidden bg-gray-50 border border-gray-100">
-                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-110" alt="vibe moment 3" />
+                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" alt="Vibe" />
               </div>
             </div>
           </div>
@@ -320,3 +325,4 @@ export default function App() {
     </div>
   );
 }
+
